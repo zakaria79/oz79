@@ -1,5 +1,6 @@
 #!/bin/bash
-git pull origin master
+git clone git@github.com:zakaria79/oz79.git portfolio
+cd portfolio
 /home/zakaria/.nvm/versions/node/v12.9.0/bin/npm install
 cd ./front-dev
 /home/zakaria/.nvm/versions/node/v12.9.0/bin/npm install
