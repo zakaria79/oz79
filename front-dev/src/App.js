@@ -40,7 +40,6 @@ function App() {
 
   return (
     <div className="App">
-      TEST
       <Router>
         <header className="App-header">
           <AppBar toggleDrawer={toggleDrawer} />
