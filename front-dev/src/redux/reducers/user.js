@@ -1,4 +1,4 @@
-import {FETCH_USER} from './../actionTypes';
+import {UPDATE_USER, FETCH_USER, LOGOUT} from './../actionTypes';
 
 const initialState = {
   login: 'anonymous',
@@ -7,8 +7,12 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
+    case UPDATE_USER:
+      return {...action.payload, isLoggedIn: true};
     case FETCH_USER:
-      return {...state, reducer: 'ok from reducer'};
+      return {...action.payload, isLoggedIn: true};
+    case LOGOUT:
+      return {...initialState};
     default:
       return state;
   }

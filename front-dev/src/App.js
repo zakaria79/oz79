@@ -17,19 +17,24 @@ import Environements from './components/environements/Environements';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import Admin from './components/admin/Admin';
 
-import {connect, Provider} from 'react-redux';
-import store from './redux/store2';
+import {fetchUser} from './redux/actions/user';
+import {connect} from 'react-redux';
 
-console.log(store());
-
-function App() {
+function App(props) {
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
+    fetchUser: false,
   });
+
+  if (!state.fetchUser) {
+    props.fetchUser();
+    setState({...state, fetchUser: true});
+  }
 
   const toggleDrawer = (side, open) => event => {
     if (
@@ -43,40 +48,35 @@ function App() {
   };
 
   return (
-    <Provider store={store()}>
-      <div className="App">
-        <Router>
-          <header className="App-header">
-            <AppBar toggleDrawer={toggleDrawer} />
-          </header>
-          <Drawer toggleDrawer={toggleDrawer} state={state} />
-          <CssBaseline />
-          <Container maxWidth="sm">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/a-propos" component={APropos} />
-              <Route path="/competences" component={Competences} />
-              <Route path="/realisations" component={Realisations} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/langages" component={Langages} />
-              <Route path="/frameworks" component={Frameworks} />
-              <Route path="/orm-odm-db" component={OrmOdmDB} />
-              <Route path="/environements" component={Environements} />
-              <Route path="/signin" component={SignIn} />
-            </Switch>
-          </Container>
-          <Footer />
-        </Router>
-      </div>
-    </Provider>
+    <div className="App">
+      <Router>
+        <header className="App-header">
+          <AppBar toggleDrawer={toggleDrawer} />
+        </header>
+        <Drawer toggleDrawer={toggleDrawer} state={state} />
+        <CssBaseline />
+        <Container maxWidth="sm">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/a-propos" component={APropos} />
+            <Route path="/competences" component={Competences} />
+            <Route path="/realisations" component={Realisations} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/langages" component={Langages} />
+            <Route path="/frameworks" component={Frameworks} />
+            <Route path="/orm-odm-db" component={OrmOdmDB} />
+            <Route path="/environements" component={Environements} />
+            <Route path="/signin" component={SignIn} />
+            <Route path="/admin" component={Admin} />
+          </Switch>
+        </Container>
+        <Footer />
+      </Router>
+    </div>
   );
 }
 
-const mapStateToProps = ({user}) => ({user});
-
-export default App;
-
-// export default connect(
-//   mapStateToProps,
-//   null,
-// )(App);
+export default connect(
+  null,
+  {fetchUser},
+)(App);

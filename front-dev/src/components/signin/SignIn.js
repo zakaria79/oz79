@@ -10,6 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {updateUser} from './../../redux/actions/user';
+import {Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -36,13 +39,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
+const SignIn = props => {
+  const {user} = props;
+
   const classes = useStyles();
   const [state, setState] = useState({
     login: 'truc',
     password: 'a',
     rememberme: true,
   });
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  if (user.isLoggedIn && user.roles.includes('admin')) {
+    return <Redirect to="/admin" />;
+  }
 
   const onChange = e => {
     const {name, value} = e.currentTarget;
@@ -60,18 +71,26 @@ export default function SignIn() {
     axios
       .post('/users/signin', state)
       .then(res => {
-        if (res.error) {
+        if (res.data.error) {
           console.log(res);
           // AFFICHER L'ERREUR
+          return setErrorMessage(res.data.message);
         }
+        setErrorMessage('');
         // ENREGISTRER DANS REDUX
         console.log(res);
+        props.updateUser(res.data);
       })
       .catch(err => console.log(err));
   };
 
   return (
     <Container component="main" maxWidth="xs">
+      {errorMessage && (
+        <div style={{color: 'red', textAlign: 'center', marginTop: '2rem'}}>
+          {errorMessage}
+        </div>
+      )}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -130,4 +149,11 @@ export default function SignIn() {
       </div>
     </Container>
   );
-}
+};
+
+const mapStateToProps = ({user}) => ({user});
+
+export default connect(
+  mapStateToProps,
+  {updateUser},
+)(SignIn);

@@ -8,6 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
 import {Link} from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {connect} from 'react-redux';
+import {logout} from './../../redux/actions/user';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,8 +24,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ButtonAppBar(props) {
+const ButtonAppBar = props => {
   const classes = useStyles();
+
+  const {user} = props;
 
   return (
     <div className={classes.root}>
@@ -39,13 +44,26 @@ export default function ButtonAppBar(props) {
           <Typography variant="h6" className={classes.title}>
             Zakaria Othmane
           </Typography>
-          <Button color="inherit">
-            <Link to="/signin" style={{color: 'white'}}>
-              <PersonIcon />
-            </Link>
-          </Button>
+          {user.isLoggedIn ? (
+            <Button color="inherit" onClick={props.logout}>
+              <ExitToAppIcon />
+            </Button>
+          ) : (
+            <Button color="inherit">
+              <Link to="/signin" style={{color: 'white'}}>
+                <PersonIcon />
+              </Link>
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
+
+const mapStateToProps = ({user}) => ({user});
+
+export default connect(
+  mapStateToProps,
+  {logout},
+)(ButtonAppBar);

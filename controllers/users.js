@@ -1,7 +1,17 @@
 const User = require('./../models/user');
 const {userAdmin} = require('./../config/data');
 
+exports.user = (req, res, next) => {
+  if (req.session.user) {
+    res.json(req.session.user);
+  }
+  res.json({error: true, message: 'Utilisateur non connecté'});
+};
+
 exports.signin = (req, res, next) => {
+  if (req.session.user && req.session.user.isLoggedIn) {
+    res.json(req.session.user);
+  }
   const {login, password, rememberme} = req.body;
 
   if (!login || !password) {
@@ -38,7 +48,19 @@ exports.signin = (req, res, next) => {
         });
       }
 
+      const userData = users[0];
+      userData.isLoggedIn = true;
+      req.session.user = userData;
       res.json(users[0]);
     })
     .catch(err => console.log(err));
+};
+
+exports.logout = (req, res, next) => {
+  req.session.destroy(err => {
+    if (err) {
+      res.json({error: true});
+    }
+    res.json({error: false});
+  });
 };

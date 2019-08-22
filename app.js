@@ -6,11 +6,18 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var keys = require('./config/keys');
 
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
 var contactRouter = require('./routes/contact');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+const store = new MongoDBStore({
+  uri: keys.mongodbURI,
+  collection: 'sessions',
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +28,15 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(
+  session({
+    secret: keys.sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+    store,
+  }),
+);
 
 app.use((req, res, next) => {
   mongoose
