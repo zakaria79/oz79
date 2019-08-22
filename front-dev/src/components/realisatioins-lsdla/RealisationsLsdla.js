@@ -1,5 +1,4 @@
 import React from 'react';
-import ContactForm from './../contact-form/ContactForm';
 
 const RealisationsLsdla = props => {
   return (
@@ -33,7 +32,6 @@ const RealisationsLsdla = props => {
         récurrents, vues multiples (jour, semaine, mois), entièrement en code
         natif. Ce qui m'a fait considérablement monter en compétence.
       </p>
-      <ContactForm />
     </div>
   );
 };

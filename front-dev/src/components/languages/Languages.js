@@ -1,5 +1,4 @@
 import React from 'react';
-import ContactForm from './../contact-form/ContactForm';
 
 const Languages = props => {
   return (
@@ -15,7 +14,6 @@ const Languages = props => {
         <li>Python (notions)</li>
         <li>C++ (notions)</li>
       </ul>
-      <ContactForm />
     </div>
   );
 };

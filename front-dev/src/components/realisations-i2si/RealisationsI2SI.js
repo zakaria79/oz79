@@ -1,5 +1,4 @@
 import React from 'react';
-import ContactForm from './../contact-form/ContactForm';
 
 const RealisationsI2SI = props => {
   return (
@@ -63,7 +62,6 @@ const RealisationsI2SI = props => {
         moins dépendre d'autres technologies qui évoluent très vite, parfois
         sans rétrocompatibilité, et qui risquent ne plus être maintenues.
       </p>
-      <ContactForm />
     </div>
   );
 };

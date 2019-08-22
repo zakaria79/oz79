@@ -1,5 +1,4 @@
 import React from 'react';
-import ContactForm from './../contact-form/ContactForm';
 
 const OrmOdmDB = props => {
   return (
@@ -17,7 +16,6 @@ const OrmOdmDB = props => {
         <li>PhpMyAdmin</li>
         <li>Compass</li>
       </ul>
-      <ContactForm />
     </div>
   );
 };
