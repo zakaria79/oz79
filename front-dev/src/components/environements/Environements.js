@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactForm from './../contact-form/ContactForm';
 
 const Environements = props => {
   return (
@@ -26,6 +27,7 @@ const Environements = props => {
         <li>Atom</li>
         <li>Rapid PHP</li>
       </ul>
+      <ContactForm />
     </div>
   );
 };

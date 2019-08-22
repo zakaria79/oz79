@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactForm from './../contact-form/ContactForm';
 
 const Frameworks = props => {
   return (
@@ -10,6 +11,7 @@ const Frameworks = props => {
         <li>Symfony</li>
         <li>Django (notions)</li>
       </ul>
+      <ContactForm />
     </div>
   );
 };

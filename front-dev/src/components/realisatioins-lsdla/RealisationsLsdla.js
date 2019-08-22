@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactForm from './../contact-form/ContactForm';
 
 const RealisationsLsdla = props => {
   return (
@@ -18,10 +19,10 @@ const RealisationsLsdla = props => {
           href="https://www.lesitedelassurance.fr"
           target="_blank"
           rel="noopener noreferrer">
-          site
+          lesitedelassurance
         </a>{' '}
-        pour un courtier en assurance. Un projet que j'ai présenté pour obtenir
-        mon diplôme de fin de fomation <em>(Titre RNCP équivalent BAC+2)</em>
+        pour un courtier en assurance. J'ai pu présenter ce projet pour obtenir
+        mon diplôme de fin de fomation (Titre RNCP équivalent BAC+2)
       </p>
       <p>
         J'ai dû d'ailleurs utiliser beaucoup de code natif (PHP, JS, SQL...)
@@ -32,6 +33,7 @@ const RealisationsLsdla = props => {
         récurrents, vues multiples (jour, semaine, mois), entièrement en code
         natif. Ce qui m'a fait considérablement monter en compétence.
       </p>
+      <ContactForm />
     </div>
   );
 };

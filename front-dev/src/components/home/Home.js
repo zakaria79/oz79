@@ -1,5 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
+import ContactForm from './../contact-form/ContactForm';
 
 const useStyles = makeStyles(theme => ({
   h1: {
@@ -11,16 +12,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const envoyerMail = () => {
-  console.log('Envoyer un email');
-};
-
 const APropos = props => {
   const classes = useStyles();
   return (
     <div className="Home">
       <h1 className={classes.h1}>Développeur web indépendant</h1>
-      <button onClick={envoyerMail}>Envoyer un email</button>
       <p>
         Développement de Site et Applications Web pour entreprises et
         particuliers
@@ -33,6 +29,7 @@ const APropos = props => {
       <p>Refonte ou ajout de fonctionnalités sur projets existants</p>
       <h2 className={classes.h2}>Technologies</h2>
       <p>PHP, Node JS, React JS, Express JS...</p>
+      <ContactForm />
     </div>
   );
 };

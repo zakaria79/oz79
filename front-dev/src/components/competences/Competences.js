@@ -1,5 +1,6 @@
 import React from 'react';
 import Languages from './../languages/Languages';
+import ContactForm from './../contact-form/ContactForm';
 import Frameworks from './../frameworks/Frameworks';
 import OrmOdmDB from './../orm-odm-db/OrmOdmDB';
 import Environements from './../environements/Environements';
@@ -12,6 +13,7 @@ const APropos = props => {
       <Frameworks />
       <OrmOdmDB />
       <Environements />
+      <ContactForm />
     </div>
   );
 };

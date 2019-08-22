@@ -1,7 +1,8 @@
 import React from 'react';
+import ContactForm from './../contact-form/ContactForm';
 
 const APropos = props => {
-  return <h1>Contact</h1>;
+  return <ContactForm />;
 };
 
 export default APropos;

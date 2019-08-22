@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactForm from './../contact-form/ContactForm';
 import './APropos.css';
 import RealisationsLsdla from './../realisatioins-lsdla/RealisationsLsdla';
 import RealisationsI2SI from './../realisations-i2si/RealisationsI2SI';
@@ -10,8 +11,7 @@ const APropos = props => {
       <h2>Formations</h2>
       <h3>2015 - 2016 : Formation en ligne</h3>
       <p>
-        Comme tous les <em>autodidactes</em>, j'ai commencé à me former{' '}
-        <em>(2015)</em>
+        Comme tous les <em>autodidactes</em>, j'ai commencé à me former (2015)
         en ligne à l'aide de plateformes telles que :
       </p>
       <ul>
@@ -60,9 +60,9 @@ const APropos = props => {
         </li>
       </ul>
       <p>
-        J'ai pu acquérir de bonnes bases dans le développement web (
-        <i>PHP, SQL, Javascript, HTML, CSS</i>) ainsi que dans l'environement
-        Linux (<i>Bash, ssh...</i>)
+        J'ai pu acquérir de bonnes bases dans le développement web ( PHP, SQL,
+        Javascript, HTML, CSS) ainsi que dans l'environement Linux (
+        <i>Bash, ssh...</i>)
       </p>
 
       <h3>
@@ -84,7 +84,7 @@ const APropos = props => {
           {' '}
           Développeur Intégrateur en réalisation d'Applications Web
         </a>{' '}
-        <em>(2016)</em> à la 3W Academy de Paris.
+        (2016) à la 3W Academy de Paris.
       </p>
       <p>Formation intensive basée sur la pratique</p>
       <h3>2015 - 2019 : Veille constante</h3>
@@ -95,10 +95,9 @@ const APropos = props => {
       </p>
       <p>
         J'essaie de tester les technos et solutions qui parraîssent le plus
-        intéressantes
-        <em>(Docker, Devops, IA, AWS...)</em>
-        et de m'y intéresser de plus près quand je pense qu'elles sont
-        pertinentes (ce qui n'est pas le cas avec tout ce qui est nouveau !)
+        intéressantes (Docker, Devops, IA, AWS...) et de m'y intéresser de plus
+        près quand je pense qu'elles sont pertinentes (ce qui n'est pas le cas
+        avec tout ce qui est nouveau !)
       </p>
       <h2>Experience</h2>
 
@@ -108,6 +107,7 @@ const APropos = props => {
 
       <h3>Août 2019</h3>
       <p>Développeur Fullstack Indépendant</p>
+      <ContactForm />
     </div>
   );
 };

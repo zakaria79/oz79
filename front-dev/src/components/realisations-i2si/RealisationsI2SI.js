@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactForm from './../contact-form/ContactForm';
 
 const RealisationsI2SI = props => {
   return (
@@ -25,9 +26,9 @@ const RealisationsI2SI = props => {
         .
       </p>
       <p>
-        La réglementation des contrats de construction <em>(CMI)</em> étant très
-        strict <em>(loi-1990)</em>, CapData permet de faciliter et d'automatiser
-        au maximum les processus :
+        La réglementation des contrats de construction (CMI) étant très strict
+        (loi-1990), CapData permet de faciliter et d'automatiser au maximum les
+        processus :
       </p>
       <ul style={{listStyle: 'initial'}}>
         <li>Suivi des chantiers</li>
@@ -49,12 +50,7 @@ const RealisationsI2SI = props => {
         <li>GED</li>
         <li>...</li>
       </ul>
-      <h3>
-        Technologies utilisées par&nbsp;
-        <a href="https://www.i2si.fr" target="_blank" rel="noopener noreferrer">
-          I2SI
-        </a>
-      </h3>
+      <h3>Technologies utilisées par dans ce projet</h3>
       <p>
         <a href="https://www.i2si.fr" target="_blank" rel="noopener noreferrer">
           I2SI
@@ -67,6 +63,7 @@ const RealisationsI2SI = props => {
         moins dépendre d'autres technologies qui évoluent très vite, parfois
         sans rétrocompatibilité, et qui risquent ne plus être maintenues.
       </p>
+      <ContactForm />
     </div>
   );
 };

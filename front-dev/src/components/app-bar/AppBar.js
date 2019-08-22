@@ -40,7 +40,7 @@ export default function ButtonAppBar(props) {
             Zakaria Othmane
           </Typography>
           <Button color="inherit">
-            <Link to="/login" style={{color: 'white'}}>
+            <Link to="/signin" style={{color: 'white'}}>
               <PersonIcon />
             </Link>
           </Button>

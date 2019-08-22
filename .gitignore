@@ -1,4 +1,5 @@
 deploy.sh
+config
 # Logs
 logs
 *.log

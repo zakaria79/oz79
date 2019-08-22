@@ -36,8 +36,3 @@ router.get('/*', function(req, res, next) {
 });
 
 module.exports = router;
-
-// 3.217.105.55
-// 35.181.159.199
-//
-// redirect.ovh.net.
