@@ -1,5 +1,7 @@
 const User = require('./../models/user');
 const {userAdmin} = require('./../config/data');
+const bcrypt = require('bcrypt');
+const {validationResult} = require('express-validator');
 
 exports.user = (req, res, next) => {
   if (req.session.user) {
@@ -8,7 +10,12 @@ exports.user = (req, res, next) => {
   res.json({error: true, message: 'Utilisateur non connecté'});
 };
 
-exports.signin = (req, res, next) => {
+exports.signin = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.json({error: true, errors: errors.array()});
+  }
+
   if (req.session.user && req.session.user.isLoggedIn) {
     res.json(req.session.user);
   }
@@ -18,42 +25,21 @@ exports.signin = (req, res, next) => {
     res.json({error: true, message: 'Champs vides'});
   }
 
-  User.find()
-    .then(users => {
-      if (!users.length) {
-        const user = new User(userAdmin);
-        user
-          .save()
-          .then(result => {
-            if (result.login !== login || result.password !== password) {
-              res.json({
-                error: true,
-                message: 'Identifiant ou mot de passe incorecte',
-              });
-            }
-            if (rememberme) {
-              // ENREGISTRER LA SESSION
-            }
-            res.json(result);
-          })
-          .catch(err => console.log(err));
-      }
+  let myuser = await User.findOne({login});
 
-      users = users.filter(u => u.login === login && u.password === password);
+  if (!myuser) {
+    res.json({error: true, message: 'Identifiants incorectes'});
+  }
 
-      if (!users.length) {
-        res.json({
-          error: true,
-          message: 'Identifiant ou mot de passe incorecte',
-        });
-      }
+  const comparison = bcrypt.compare(password, myuser.password);
 
-      const userData = users[0];
-      userData.isLoggedIn = true;
-      req.session.user = userData;
-      res.json(users[0]);
-    })
-    .catch(err => console.log(err));
+  if (!comparison) {
+    res.json({error: true, message: 'Identifiants incorectes'});
+  }
+
+  myuser.isLoggedIn = true;
+  req.session.user = myuser;
+  res.json(myuser);
 };
 
 exports.logout = (req, res, next) => {

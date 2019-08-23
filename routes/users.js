@@ -2,16 +2,36 @@ var express = require('express');
 var router = express.Router();
 var {signin, user, logout} = require('./../controllers/users');
 var User = require('./../models/user');
-
-router.get('/truc-user', async (req, res, next) => {
-  let myuser = await User.findOne({firstname: 'zakaria2'});
-  myuser.firstname = 'zakaria';
-  myuser = await myuser.save();
-  res.json(myuser);
-});
+var bcrypt = require('bcrypt');
+const {check, body} = require('express-validator');
 
 router.get('/user', user);
-router.post('/signin', signin);
+router.post(
+  '/signin',
+  [
+    check('login')
+      .isLength({min: 5})
+      .withMessage('Veuillez saisir un identifiant valide')
+      .custom((value, {req}) => {
+        return User.findOne({login: value}).then(userDoc => {
+          if (!userDoc) {
+            // ON PEUT AUSSI VERIFIER LE BCRYPT
+            // ET SUPPRIMER LA VALIDATION DU CONTROLLER
+            return Promise.reject('Indentifiant introuvable');
+          }
+          return true;
+        });
+        // if (value === 'truc') {
+        //   throw new Error('Indentifiant non valide');
+        // }
+        return true;
+      }),
+    body('password', 'Veuillez saisir un mot de passe valide').isLength({
+      min: 5,
+    }),
+  ],
+  signin,
+);
 router.get('/logout', logout);
 
 /* GET users listing. */
