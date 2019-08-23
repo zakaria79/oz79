@@ -49,7 +49,6 @@ function App(props) {
 
   return (
     <div className="App">
-      ANRUSITENARUSIETNRuist
       <Router>
         <header className="App-header">
           <AppBar toggleDrawer={toggleDrawer} />
