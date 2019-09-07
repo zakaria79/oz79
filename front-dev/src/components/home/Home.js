@@ -1,7 +1,7 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import ContactForm from './../contact-form/ContactForm';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   h1: {
@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
 
 const APropos = props => {
   const classes = useStyles();
-  console.log(props.user);
   return (
     <div className="Home">
       <h1 className={classes.h1}>Développeur web indépendant</h1>
@@ -36,7 +35,7 @@ const APropos = props => {
   );
 };
 
-const mapStateToProps = ({user}) => ({user});
+const mapStateToProps = ({ user }) => ({ user });
 
 export default connect(
   mapStateToProps,

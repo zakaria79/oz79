@@ -9,7 +9,7 @@ var keys = require('./config/keys');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
-var contactRouter = require('./routes/contact');
+var contactsRouter = require('./routes/contacts');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -25,7 +25,7 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -38,14 +38,14 @@ app.use(
   }),
 );
 
-app.use((req, res, next) => {
-  mongoose
-    .connect(keys.mongodbURI)
-    .then(result => next())
-    .catch(err => console.error(er));
-});
+// app.use((req, res, next) => {
+//   mongoose
+//     .connect(keys.mongodbURI)
+//     .then(result => next())
+//     .catch(err => console.error(err));
+// });
 
-app.use('/contact', contactRouter);
+app.use('/contacts', contactsRouter);
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 

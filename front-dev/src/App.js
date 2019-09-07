@@ -47,6 +47,8 @@ function App(props) {
     setState({...state, [side]: open});
   };
 
+  document.title = 'Portfolio Développeur Web Fullstack Freelance';
+
   return (
     <div className="App">
       <Router>
@@ -55,7 +57,7 @@ function App(props) {
         </header>
         <Drawer toggleDrawer={toggleDrawer} state={state} />
         <CssBaseline />
-        <Container maxWidth="sm">
+        <Container fixed>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/a-propos" component={APropos} />

@@ -1,52 +1,54 @@
 const User = require('./../models/user');
-const {userAdmin} = require('./../config/data');
+const { userAdmin } = require('./../config/data');
 const bcrypt = require('bcrypt');
-const {validationResult} = require('express-validator');
+const { validationResult, check, body } = require('express-validator');
 
 exports.user = (req, res, next) => {
   if (req.session.user) {
-    res.json(req.session.user);
+    return res.json(req.session.user);
   }
-  res.json({error: true, message: 'Utilisateur non connecté'});
+  res.json({ error: true, message: 'Utilisateur non connecté' });
 };
+
+exports.signinValidation = [
+  check('login', 'Identifiant introuvable')
+    .isLength({ min: 5 })
+    .custom((value, { req }) => {
+      return User.findOne({ login: value }).then(userDoc => {
+        if (!userDoc || !bcrypt.compare(value, userDoc.password)) {
+          return Promise.reject('Identifiants introuvables');
+        }
+
+        req.session.user = userDoc;
+        req.session.user.isLoggedIn = true;
+
+        return true;
+      });
+      return true;
+    }),
+  body('password', 'Veuillez saisir un mot de passe valide').isLength({
+    min: 5,
+  }),
+];
 
 exports.signin = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.json({error: true, errors: errors.array()});
+    return res.json({ error: true, errors: errors.array() });
   }
 
   if (req.session.user && req.session.user.isLoggedIn) {
     res.json(req.session.user);
   }
-  const {login, password, rememberme} = req.body;
 
-  if (!login || !password) {
-    res.json({error: true, message: 'Champs vides'});
-  }
-
-  let myuser = await User.findOne({login});
-
-  if (!myuser) {
-    res.json({error: true, message: 'Identifiants incorectes'});
-  }
-
-  const comparison = bcrypt.compare(password, myuser.password);
-
-  if (!comparison) {
-    res.json({error: true, message: 'Identifiants incorectes'});
-  }
-
-  myuser.isLoggedIn = true;
-  req.session.user = myuser;
-  res.json(myuser);
+  res.json({ error: true, message: 'Identifiants incorectes' });
 };
 
 exports.logout = (req, res, next) => {
   req.session.destroy(err => {
     if (err) {
-      res.json({error: true});
+      res.json({ error: true });
     }
-    res.json({error: false});
+    res.json({ error: false });
   });
 };

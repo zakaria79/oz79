@@ -48,7 +48,7 @@ const ContactForm = props => {
   const onSubmit = e => {
     e.preventDefault();
     axios
-      .post('/contact', state)
+      .post('/contacts', state)
       .then(res => {
         console.log(res);
       })
