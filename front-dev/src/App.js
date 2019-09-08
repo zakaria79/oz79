@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import AppBar from './components/app-bar/AppBar';
 import Drawer from './components/drawer/Drawer';
@@ -14,13 +14,14 @@ import Langages from './components/languages/Languages';
 import Frameworks from './components/frameworks/Frameworks';
 import OrmOdmDB from './components/orm-odm-db/OrmOdmDB';
 import Environements from './components/environements/Environements';
+import MyCamera from './components/camera/Camera';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Admin from './components/admin/Admin';
 
-import {fetchUser} from './redux/actions/user';
-import {connect} from 'react-redux';
+import { fetchUser } from './redux/actions/user';
+import { connect } from 'react-redux';
 
 function App(props) {
   const [state, setState] = React.useState({
@@ -33,7 +34,7 @@ function App(props) {
 
   if (!state.fetchUser) {
     props.fetchUser();
-    setState({...state, fetchUser: true});
+    setState({ ...state, fetchUser: true });
   }
 
   const toggleDrawer = (side, open) => event => {
@@ -44,7 +45,7 @@ function App(props) {
       return;
     }
 
-    setState({...state, [side]: open});
+    setState({ ...state, [side]: open });
   };
 
   document.title = 'Portfolio Développeur Web Fullstack Freelance';
@@ -70,6 +71,7 @@ function App(props) {
             <Route path="/environements" component={Environements} />
             <Route path="/signin" component={SignIn} />
             <Route path="/admin" component={Admin} />
+            <Route path="/camera" component={MyCamera} />
           </Switch>
         </Container>
         <Footer />
@@ -80,5 +82,5 @@ function App(props) {
 
 export default connect(
   null,
-  {fetchUser},
+  { fetchUser },
 )(App);
