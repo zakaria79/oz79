@@ -38,7 +38,7 @@ const MyCamera = props => {
 
           <div>
             <Camera
-              idealFacingMode={FACING_MODES.ENVIRONMENT}
+              idealFacingMode={FACING_MODES.USER}
               onTakePhoto={dataUri => onTakePhoto(dataUri)}
             />
           </div>
